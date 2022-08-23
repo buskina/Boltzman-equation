@@ -103,3 +103,26 @@ for eig in eigs:
 
 plt.show()
 plt.savefig('eigenvalues.pdf')
+
+
+########################################################################
+
+
+Ts = ['1', '01', '001', '0001']
+
+fig, ax = plt.subplots()
+
+ax.set_xscale('log')
+
+ax.grid(which='major', color='#CCCCCC', linestyle='--')
+ax.grid(which='minor', color='#CCCCCC', linestyle=':')
+        
+plt.xlabel(r'Rescaled wavevector, $\tilde k^2$')
+plt.ylabel(r'Anomalous conductance, $\sigma/\sigma_0$')
+
+for T in Ts:
+    x, y = readfile( T + '.txt')
+    plt.plot(x, y, linewidth = 3)
+
+plt.show()
+plt.savefig('Free_conductance_k.pdf')
