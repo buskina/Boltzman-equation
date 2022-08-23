@@ -56,14 +56,15 @@ def calc_sigma(t, s, eigenvalues, m):
     else:
         return eigenvalues[m] + s/calc_sigma(t, s, eigenvalues, m + 1)
 
-xdata = numpy.logspace(start = -3, stop = 4, num = 100)
+xdata = numpy.logspace(start = -3, stop = 0, num = 100)
 ydata = []
+s = 1
 for i in range(len(xdata)):
-    k = (0.5*(numpy.sqrt(1+4*xdata[i])-1))
+    k = (0.5*(numpy.sqrt(1+4*s)-1))
     t = 1
-    ydata.append(k / xdata[i] * calc_sigma(t, xdata[i], gen_eigenvalues(t), 0))
+    ydata.append(k / s * calc_sigma(xdata[i], s, gen_eigenvalues(xdata[i]), 0))
 
-save_results("1.txt", "nu*k**2", "sigma", xdata, ydata)
+save_results("1k.txt", "nu*k**2", "sigma", xdata, ydata)
 
 """xdata = numpy.logspace(start = -3, stop = 0, num = 100)
 ydata = []
