@@ -47,26 +47,18 @@ def save_results(filename, xaxis, yaxis, xdata, ydata):
             f.write(str(xdata[i])+" "+str(ydata[i])+"\n")
         f.close()
 
-def calc_sigma(t, L, n, eigenvalues, m):
+def calc_sigma(t, s, eigenvalues, m):
     """
     Counts sigma 
     """
-    # To Do: Is it OK to leave this calculations here?
-
-    gamma = t**2
-    nu = v_f**2/(4 * gamma)
-    k = 2 * numpy.pi/L * n
-    sum_pres = 0.5 * (numpy.sqrt(1 + 4 * nu * k**2/gamma) - 1)
-    sum_approx = nu * k**2/gamma
-
     if m == len(eigenvalues) - 1:
-        return eigenvalues[m] + sum_approx
+        return eigenvalues[m] + 0.5*(numpy.sqrt(1+4*s)-1)
     else:
-        return eigenvalues[m] + sum_approx/calc_sigma(t, L, n, eigenvalues, m + 1)
+        return eigenvalues[m] + s/calc_sigma(t, s, eigenvalues, m + 1)
 
-xdata = numpy.logspace(start = -3, stop = 0, num = 100)
+xdata = numpy.logspace(start = -3, stop = 2, num = 100)
 ydata = []
 for i in range(len(xdata)):
-    ydata.append(calc_eigenvalue(3, xdata[i]))
+    ydata.append(calc_sigma(1, xdata[i], gen_eigenvalues(1), 0))
 
-save_results("3.txt", "T/T_f", "gamma", xdata, ydata)
+save_results("1.txt", "nu*k**2", "sigma", xdata, ydata)
