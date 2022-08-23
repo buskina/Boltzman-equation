@@ -22,7 +22,7 @@ def equal(x, y):
     """
     if x < y:
         x, y = y, x
-    return x / y < 10
+    return x / y < 1.05
 
 def gen_eigenvalues(t):
     """
@@ -56,13 +56,14 @@ def calc_sigma(t, s, eigenvalues, m):
     else:
         return eigenvalues[m] + s/calc_sigma(t, s, eigenvalues, m + 1)
 
-xdata = numpy.logspace(start = -3, stop = 2, num = 100)
+xdata = numpy.logspace(start = -3, stop = 4, num = 100)
 ydata = []
 for i in range(len(xdata)):
     k = (0.5*(numpy.sqrt(1+4*xdata[i])-1))
-    ydata.append(k*calc_sigma(0.001, xdata[i], gen_eigenvalues(0.001), 0))
+    t = 1
+    ydata.append(k / xdata[i] * calc_sigma(t, xdata[i], gen_eigenvalues(t), 0))
 
-save_results("0001.txt", "nu*k**2", "sigma", xdata, ydata)
+save_results("1.txt", "nu*k**2", "sigma", xdata, ydata)
 
 """xdata = numpy.logspace(start = -3, stop = 0, num = 100)
 ydata = []
