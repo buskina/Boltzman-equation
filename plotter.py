@@ -34,8 +34,8 @@ plt.rcParams["errorbar.capsize"]=5
 
 
 #Eigenvalues as a function of Temperature
+eigs = [2, 3, 5, 7, 9]
 
-x, y = readfile('3.txt')
 #print(x)
 #print(y)
 
@@ -82,8 +82,8 @@ ax.grid(which='minor', color='#CCCCCC', linestyle=':')
 #ax.errorbar(x1, y1, yerr=yerr, xerr=xerr, fmt = '.k', ecolor='#666666', capthick=1)
 
 # Подписи осей
-plt.xlabel(r'Temperature of the system $\ln T/T_F$')
-plt.ylabel(r'Eigenvalues $\gamma_m$, arbitrary scale')
+plt.xlabel(r'Temperature of the system, $ T/T_F$')
+plt.ylabel(r'Eigenvalues, $\gamma_m T_F^2/T^2$, arbitrary scale')
 
 # Название графика
 #plt.title('График 2. Зависимость |μ|(1/T)')
@@ -92,7 +92,9 @@ plt.ylabel(r'Eigenvalues $\gamma_m$, arbitrary scale')
 #h1 = np.arange(X_LIM_BOTTOM, X_LIM_UP, (X_LIM_UP-X_LIM_BOTTOM)/100)
 #p1, cov1= np.polyfit(x, y,  rcond=None, full=False, w=None, cov=True)
 #plt.plot(h1, h1*p1[0]+p1[1], color = '#a0a0a0')
-plt.plot(x, y, linewidth = 3)
+for eig in eigs:
+    x, y = readfile(str(eig) + '.txt')
+    plt.plot(x, y, linewidth = 3)
 
 
 #print('k1 =', p1[0], ' b1 =', p1[1])
