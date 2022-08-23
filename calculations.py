@@ -1,10 +1,10 @@
+from re import X
 import numpy
-import json
 
 # Constants
 
 T_f = 10
-v_f = 10^6
+v_f = 10**6
 
 def calc_eigenvalue(m, t):
     """
@@ -12,7 +12,7 @@ def calc_eigenvalue(m, t):
     """
     m += 2
     if m % 2:
-        return (m^4 * t^2)/(1 + m^4 * t^2)
+        return (m**4 * t**2)/(1 + m**4 * t**2)
     else:
         return 1
 
@@ -44,26 +44,29 @@ def save_results(filename, xaxis, yaxis, xdata, ydata):
     with open(filename, 'w') as f:
         f.write(xaxis+" "+yaxis+"\n")
         for i in range(len(xdata)):
-            f.write(xdata[i]+" "+ydata[i]+"\n")
+            f.write(str(xdata[i])+" "+str(ydata[i])+"\n")
         f.close()
 
-def count_sigma(t, L, n, eigenvalues, m):
+def calc_sigma(t, L, n, eigenvalues, m):
     """
     Counts sigma 
     """
     # To Do: Is it OK to leave this calculations here?
 
-    gamma = t^2
-    nu = v_f^2/(4 * gamma)
+    gamma = t**2
+    nu = v_f**2/(4 * gamma)
     k = 2 * numpy.pi/L * n
-    sum_pres = 0.5 * (numpy.sqrt(1 + 4 * nu * k^2/gamma) - 1)
-    sum_approx = nu * k^2/gamma
+    sum_pres = 0.5 * (numpy.sqrt(1 + 4 * nu * k**2/gamma) - 1)
+    sum_approx = nu * k**2/gamma
 
     if m == len(eigenvalues) - 1:
         return eigenvalues[m] + sum_approx
     else:
-        return eigenvalues[m] + sum_approx/count_sigma(t, L, n, eigenvalues, m + 1)
+        return eigenvalues[m] + sum_approx/calc_sigma(t, L, n, eigenvalues, m + 1)
 
+xdata = numpy.logspace(start = -3, stop = 0, num = 100)
+ydata = []
+for i in range(len(xdata)):
+    ydata.append(calc_eigenvalue(3, xdata[i]))
 
-
-
+save_results("3.txt", "T/T_f", "gamma", xdata, ydata)
