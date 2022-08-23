@@ -22,7 +22,7 @@ def equal(x, y):
     """
     if x < y:
         x, y = y, x
-    return x / y < 1.05
+    return x / y < 1.02
 
 def gen_eigenvalues(t):
     """
