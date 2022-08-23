@@ -47,7 +47,7 @@ def save_results(filename, xaxis, yaxis, xdata, ydata):
             f.write(xdata[i]+" "+ydata[i]+"\n")
         f.close()
 
-def count_sigma(t, L, n, eigenvalues):
+def count_sigma(t, L, n, eigenvalues, m):
     """
     Counts sigma 
     """
@@ -58,6 +58,11 @@ def count_sigma(t, L, n, eigenvalues):
     k = 2 * numpy.pi/L * n
     sum_pres = 0.5 * (numpy.sqrt(1 + 4 * nu * k^2/gamma) - 1)
     sum_approx = nu * k^2/gamma
+
+    if m == len(eigenvalues) - 1:
+        return eigenvalues[m] + sum_approx
+    else:
+        return eigenvalues[m] + sum_approx/count_sigma(t, L, n, eigenvalues, m + 1)
 
 
 
