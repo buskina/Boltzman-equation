@@ -23,7 +23,7 @@ def readfile(filename):
     
 #Plotting params
 
-plt.rcParams['text.usetex'] = True
+plt.rcParams['text.usetex'] = False
 plt.rcParams['figure.figsize'] = (8,6)
 plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.size'] = '18'
