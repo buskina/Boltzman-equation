@@ -52,25 +52,25 @@ def calc_sigma(t, s, eigenvalues, m):
     Counts sigma 
     """
     if m == len(eigenvalues) - 1:
-        return eigenvalues[m] + 0.5*s
+        return eigenvalues[m] + s
     else:
         return eigenvalues[m] + s/calc_sigma(t, s, eigenvalues, m + 1)
 
-def sum(t, s_0):
+def Sum(t, s_0):
     n = 1
-    sum = 0
+    sum0 = 0
     s = s_0*n**2
-    while (calc_sigma(t, s, gen_eigenvalues(t), 0) > 10**(-3)):
-        sum+=calc_sigma(t, s, gen_eigenvalues(t), 0)
+    while (calc_sigma(t, s, gen_eigenvalues(t), 0)/s / (sum0+1e-10) > 10**(-3)):
+        sum0+=calc_sigma(t, s, gen_eigenvalues(t), 0)/s
         n += 1
         s = s_0*n**2
-        print(sum)
-    return sum
+        print(s, calc_sigma(t, s, gen_eigenvalues(t), 0), calc_sigma(t, s, gen_eigenvalues(t), 0)/s)
+    return sum0* s_0 * 6/ numpy.pi**2
 
-xdata = numpy.logspace(start = -4, stop = -1, num = 100)
+xdata = numpy.logspace(start = -8, stop = -3, num = 100)
 ydata = []
 for i in range(len(xdata)):
-    ydata.append(sum(0.001, xdata[i]))
+    ydata.append(Sum(1, xdata[i]))
 
 save_results("1t.txt", "nu*k**2", "sigma", xdata, ydata)
 

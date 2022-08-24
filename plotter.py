@@ -165,3 +165,33 @@ for i in range(len(ks)):
 
 plt.show()
 plt.savefig('Free_conductance_T.pdf')
+
+
+###############################################################################
+
+Ts = ['1t', '01t', '001t', '0001t']
+Ts1 = [1, 0.1, 0.01, 0.001]
+
+fig, ax = plt.subplots()
+
+cm1 = mcol.LinearSegmentedColormap.from_list("MyCmapName",["r","b"])
+cnorm = mcol.Normalize(vmin = np.min(-np.log(Ts1)), vmax = np.max(-np.log(Ts1)))
+cpick = cm.ScalarMappable(norm=cnorm,cmap=cm1)
+cpick.set_array([])
+
+ax.set_xscale('log')
+
+ax.grid(which='major', color='#CCCCCC', linestyle='--')
+ax.grid(which='minor', color='#CCCCCC', linestyle=':')
+        
+plt.xlabel(r'Rescaled wavevector, $\tilde k^2$')
+plt.ylabel(r'Anomalous conductance, $\sigma/\sigma_0$')
+
+for i in range(len(Ts)):
+    T = Ts[i]
+    T1 = Ts1[i]
+    x, y = readfile( T + '.txt')
+    plt.plot(x, y, linewidth = 3, color = cpick.to_rgba(-np.log(T1)))
+
+plt.show()
+plt.savefig('Line_conductance_k.pdf')
