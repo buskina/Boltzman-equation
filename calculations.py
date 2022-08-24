@@ -43,7 +43,9 @@ def equal(x, y):
         i += 1
     return eigenvalues"""
 
-def gen_eigenvalues(t, n):
+
+
+def gen_eigenvalues_n(t, n):
     
     eigenvalues = [calc_eigenvalue(0, t)]
     i = 1
@@ -53,6 +55,10 @@ def gen_eigenvalues(t, n):
         i += 2
     return eigenvalues
 
+def fen_gen_eigenvalues_n(t):
+    n = 1
+    return gen_eigenvalues_n(t, n)
+    
 def save_results(filename, xaxis, yaxis, xdata, ydata):
     """
     Saves results of calculations in file which is used for plotting
