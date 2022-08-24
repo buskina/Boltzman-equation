@@ -94,7 +94,7 @@ plt.ylabel(r'Eigenvalues, $\gamma_m T_F^2/T^2$, arbitrary scale')
 #p1, cov1= np.polyfit(x, y,  rcond=None, full=False, w=None, cov=True)
 #plt.plot(h1, h1*p1[0]+p1[1], color = '#a0a0a0')
 for eig in eigs:
-    x, y = readfile(str(eig) + '.txt')
+    x, y = readfile( './gammas/'+ str(eig) + '.txt')
     plt.plot(x, y, linewidth = 3)
 
 
@@ -130,7 +130,7 @@ plt.ylabel(r'Anomalous conductance, $\sigma/\sigma_0$')
 for i in range(len(Ts)):
     T = Ts[i]
     T1 = Ts1[i]
-    x, y = readfile( T + '.txt')
+    x, y = readfile('Free_C_k/' + T + '.txt')
     plt.plot(x, y, linewidth = 3, color = cpick.to_rgba(-np.log(T1)))
 
 plt.show()
@@ -160,7 +160,7 @@ plt.ylabel(r'Anomalous conductance, $\sigma/\sigma_0$')
 for i in range(len(ks)):
     k = ks[i]
     k1 = ks1[i]
-    x, y = readfile( k + '.txt')
+    x, y = readfile('./Free_C_T/' + k + '.txt')
     plt.plot(x, y, linewidth = 3, color = cpick.to_rgba(-np.log(k1)))
 
 plt.show()
@@ -190,7 +190,7 @@ plt.ylabel(r'Anomalous conductance, $\sigma/\sigma_0$')
 for i in range(len(Ts)):
     T = Ts[i]
     T1 = Ts1[i]
-    x, y = readfile( T + '.txt')
+    x, y = readfile('./Line_C_k/' + T + '.txt')
     plt.plot(x, y, linewidth = 3, color = cpick.to_rgba(-np.log(T1)))
 
 plt.show()
@@ -221,7 +221,7 @@ plt.ylabel(r'Anomalous conductance, $\sigma/\sigma_0$')
 for i in range(len(ks)):
     k = ks[i]
     k1 = ks1[i]
-    x, y = readfile( k + '.txt')
+    x, y = readfile( './Line_C_T/'+ k + '.txt')
     plt.plot(x, y, linewidth = 3, color = cpick.to_rgba(-np.log(k1)))
 
 plt.show()
