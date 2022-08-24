@@ -55,7 +55,7 @@ def gen_eigenvalues_n(t, n):
         i += 2
     return eigenvalues
 
-def fen_gen_eigenvalues_n(t):
+def gen_eigenvalues(t):
     n = 1
     return gen_eigenvalues_n(t, n)
     
