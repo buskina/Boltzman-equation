@@ -6,13 +6,21 @@ import numpy
 T_f = 10
 v_f = 10**6
 
-def calc_eigenvalue(m, t):
-    """
-    Calculates m-th eigenvalue in terms of gamma = even eigenvalue
-    """
+"""def calc_eigenvalue(m, t):
+
+    #Calculates m-th eigenvalue in terms of gamma = even eigenvalue
+
     m += 2
     if m % 2:
         return (m**4 * t**2)/(1 + m**4 * t**2)
+    else:
+        return 1
+"""
+def calc_eigenvalue(m, t):
+
+    m += 2
+    if m % 2:
+        return t**2
     else:
         return 1
 
@@ -24,15 +32,25 @@ def equal(x, y):
         x, y = y, x
     return x / y < 1.02
 
-def gen_eigenvalues(t):
-    """
-    Generates a list of eigenvalues. The list ends then eigenvalues become equal (see the definition in corresponding function)
-    """
+"""def gen_eigenvalues(t):
+
+    #Generates a list of eigenvalues. The list ends then eigenvalues become equal (see the definition in corresponding function)
+    
     eigenvalues = [calc_eigenvalue(0, t)]
     i = 1
     while not equal(eigenvalues[-1], calc_eigenvalue(i, t)):
         eigenvalues.append(calc_eigenvalue(i, t))
         i += 1
+    return eigenvalues"""
+
+def gen_eigenvalues(t, n):
+    
+    eigenvalues = [calc_eigenvalue(0, t)]
+    i = 1
+    while i<=2*n:
+        eigenvalues.append(calc_eigenvalue(i, t))
+        eigenvalues.append(calc_eigenvalue(i + 1, t))
+        i += 2
     return eigenvalues
 
 def save_results(filename, xaxis, yaxis, xdata, ydata):
@@ -67,12 +85,12 @@ def Sum(t, s_0):
         print(s, calc_sigma(t, s, gen_eigenvalues(t), 0), calc_sigma(t, s, gen_eigenvalues(t), 0)/s)
     return sum0* s_0 * 6/ numpy.pi**2
 
-xdata = numpy.logspace(start = -8, stop = -3, num = 100)
+"""xdata = numpy.logspace(start = -3, stop = 1, num = 100)
 ydata = []
 for i in range(len(xdata)):
-    ydata.append(Sum(1, xdata[i]))
+    ydata.append(Sum(xdata[i], 10**(-6)))
 
-save_results("1t.txt", "nu*k**2", "sigma", xdata, ydata)
+save_results("-6.txt", "nu*k**2", "sigma", xdata, ydata)"""
 
 
 """xdata = numpy.logspace(start = -3, stop = 0, num = 100)
