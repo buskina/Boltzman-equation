@@ -76,7 +76,8 @@ def calc_sigma(t, s, eigenvalues, m):
     Counts sigma 
     """
     if m == len(eigenvalues) - 1:
-        return eigenvalues[m] + 0.5*(numpy.sqrt(1+4*s) - 1)
+        #return eigenvalues[m] + 0.5*(numpy.sqrt(1+4*s) - 1)
+        return eigenvalues[m] + s
     else:
         return eigenvalues[m] + s/calc_sigma(t, s, eigenvalues, m + 1)
 
@@ -91,14 +92,26 @@ def Sum(t, s_0):
         print(s, calc_sigma(t, s, gen_eigenvalues(t), 0), calc_sigma(t, s, gen_eigenvalues(t), 0)/s)
     return sum0* s_0 * 6/ numpy.pi**2
 
-"""xdata = numpy.logspace(start = -8, stop = -3, num = 100)
+'''
+xdata = numpy.logspace(start = -8, stop = -3, num = 100)
 ydata = []
 for i in range(len(xdata)):
     ydata.append(Sum(0.001, xdata[i]))
 
-save_results("0001LineK.txt", "nu*k**2", "sigma", xdata, ydata)"""
+save_results("0001LineK.txt", "nu*k**2", "sigma", xdata, ydata)
 
-xdata = numpy.logspace(start = -3, stop = 1, num = 100)
+'''
+
+xdata = numpy.logspace(start = -3, stop = -0, num = 100)
+ydata = []
+for i in range(len(xdata)):
+    ydata.append(Sum(xdata[i], 1e-3))
+
+save_results("-3.txt", "nu*k**2", "sigma", xdata, ydata)
+
+
+'''
+xdata = numpy.logspace(start = -8, stop = 1, num = 100)
 ydata = []
 for i in range(len(xdata)):
     t = 1
@@ -106,8 +119,8 @@ for i in range(len(xdata)):
     k = 0.5*(numpy.sqrt(1+4*s) - 1)/s
     ydata.append(k*calc_sigma(t, s, gen_eigenvalues(t), 0))
 
-save_results("1FreeK.txt", "nu*k**2", "sigma", xdata, ydata)
-
+save_results("1.txt", "nu*k**2", "sigma", xdata, ydata)
+'''
 
 """xdata = numpy.logspace(start = -3, stop = 0, num = 100)
 ydata = []

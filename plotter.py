@@ -23,7 +23,7 @@ def readfile(filename):
     
 #Plotting params
 
-plt.rcParams['text.usetex'] = False
+plt.rcParams['text.usetex'] = True
 plt.rcParams['figure.figsize'] = (8,6)
 plt.rcParams['font.family'] = 'serif'
 plt.rcParams['font.size'] = '18'
@@ -185,7 +185,7 @@ ax.grid(which='major', color='#CCCCCC', linestyle='--')
 ax.grid(which='minor', color='#CCCCCC', linestyle=':')
         
 plt.xlabel(r'Rescaled wavevector, $\tilde k^2$')
-plt.ylabel(r'Anomalous conductance, $\sigma/\sigma_0$')
+plt.ylabel(r'Anomalous conductance, $\langle\sigma\rangle/\langle\sigma_0 \rangle$')
 
 for i in range(len(Ts)):
     T = Ts[i]
@@ -216,7 +216,7 @@ ax.grid(which='major', color='#CCCCCC', linestyle='--')
 ax.grid(which='minor', color='#CCCCCC', linestyle=':')
         
 plt.xlabel(r'Temperature, $T/T_F$')
-plt.ylabel(r'Anomalous conductance, $\sigma/\sigma_0$')
+plt.ylabel(r'Anomalous conductance, $\langle \sigma \rangle / \langle \sigma_0 \rangle$')
 
 for i in range(len(ks)):
     k = ks[i]
